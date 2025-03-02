@@ -1,8 +1,25 @@
 AllCops:
+  DisplayCopNames: true
   TargetRubyVersion: 3.1
+  NewCops: enable
+  SuggestExtensions: false
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
+
+Style/Documentation:
+  Enabled: false
+
+Style/HashSyntax:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+  Exclude:
+    - spec/**/*
+
+Lint/MissingSuper:
+  Enabled: false
