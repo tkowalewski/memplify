@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   spec.add_dependency "base64", "~> 0.2.0"
+  spec.add_dependency "json", "~> 2.10", ">= 2.10.1"
   spec.add_dependency "memory_profiler", "~> 1.1"
 
   # For more information and examples about making a new gem, check out our

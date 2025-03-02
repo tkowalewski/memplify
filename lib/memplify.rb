@@ -3,6 +3,7 @@
 require "memory_profiler"
 require "net/http"
 require "base64"
+require "json"
 
 require_relative "memplify/version"
 require_relative "memplify/configuration"
