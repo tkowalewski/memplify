@@ -1,28 +1,53 @@
-# Memplify
+# memplify (Proof of concept)
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/memplify`. To experiment with that code, run `bin/console` for an interactive prompt.
+Memplify is a custom reporter ([memplify.com](https://memplify.com)) for [memory_profiler](https://rubygems.org/gems/memory_profiler) gem.
 
 ## Installation
-
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
 
 Install the gem and add to the application's Gemfile by executing:
 
 ```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle add memplify
 ```
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+gem install memplify
 ```
 
 ## Usage
 
-TODO: Write usage instructions here
+### Rails
+
+Create initializer for memplify: `config/initializers/memplify.rb`
+
+```ruby
+require "memplify"
+
+Memplify.configure do |configuration|
+  configuration.access_token = "[ACCESS_TOKEN]"
+end
+```
+
+Add memplify middleware to application for specific environment. Do not use it on **production**!
+
+For example add memplify middleware for staging environment: `config/environments/staging.rb`
+
+```ruby
+Rails.application.configure do
+  config.middleware.insert(0, Memplify::Middleware)
+end
+```
+
+You can use memplify also in background jobs and in any place of your app by using reporter directly.
+Just provide report identifier and wrap code with:
+
+```ruby
+Memplify.report("runtime/custom/profile") do
+  # Your code
+end
+```
 
 ## Development
 
@@ -32,7 +57,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/memplify. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/memplify/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/tkowalewski/memplify. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/memplify/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
