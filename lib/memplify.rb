@@ -20,11 +20,11 @@ module Memplify
     end
 
     def report(identifier, &block)
-      report = MemoryProfiler.report do
+      result = MemoryProfiler.report do
         block.call
       end
 
-      Reporter.new(identifier, report).call
+      Reporter.new(identifier, result).call
     end
   end
 end

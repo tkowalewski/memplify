@@ -2,13 +2,13 @@
 
 module Memplify
   class Reporter
-    def initialize(identifier, report)
+    def initialize(identifier, result)
       @identifier = identifier
-      @report = report
+      @result = result
     end
 
     def call
-      @report.pretty_print(string_io, **options)
+      @result.pretty_print(string_io, **options)
 
       Net::HTTP.post(uri, body.to_json, headers)
     end
