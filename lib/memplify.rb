@@ -23,9 +23,7 @@ module Memplify
     def report(identifier, profile: true, &block)
       return block.call unless profile
 
-      result = MemoryProfiler.report do
-        block.call
-      end
+      result = MemoryProfiler.report(&block)
 
       Reporter.new(identifier, result).call
     end
