@@ -47,6 +47,35 @@ Memplify.report("custom/profile", profile: Rails.env.staging?) do
 end
 ```
 
+### Rack
+
+```ruby
+# config.ru
+require "memplify"
+
+Memplify.configure do |configuration|
+  configuration.access_token = "[ACCESS_TOKEN]"
+end
+
+class Application
+  def call(env)
+    status  = 200
+    headers = { "content-type" => "text/html" }
+    body    = ["Kaboom!"]
+
+    [status, headers, body]
+  end
+end
+
+builder = Rack::Builder.new do
+  use Memplify::Middleware
+
+  map('/') { run Application.new }
+end
+
+run builder
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
