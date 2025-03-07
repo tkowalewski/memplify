@@ -1,4 +1,4 @@
-# memplify (Proof of concept)
+# memplify
 
 Memplify is a custom reporter ([memplify.com](https://memplify.com)) for [memory_profiler](https://rubygems.org/gems/memory_profiler) gem.
 
@@ -18,11 +18,12 @@ gem install memplify
 
 ## Usage
 
-### Rails
+### Rails applications
 
-Create initializer for memplify: `config/initializers/memplify.rb`
+Create initializer for memplify:
 
 ```ruby
+# config/initializers/memplify.rb
 require "memplify"
 
 Memplify.configure do |configuration|
@@ -30,24 +31,16 @@ Memplify.configure do |configuration|
 end
 ```
 
-For example add memplify middleware for staging environment: `config/environments/staging.rb`
+For example add memplify middleware for staging environment:
 
 ```ruby
+# config/environments/staging.rb
 Rails.application.configure do
   config.middleware.insert(0, Memplify::Middleware)
 end
 ```
 
-You can use memplify also in background jobs and in any place of your app by using reporter directly.
-Just provide report identifier and wrap code with:
-
-```ruby
-Memplify.report("custom/profile", profile: Rails.env.staging?) do
-  # Your code
-end
-```
-
-### Rack
+### Rack applications
 
 ```ruby
 # config.ru
@@ -74,6 +67,17 @@ builder = Rack::Builder.new do
 end
 
 run builder
+```
+
+### Other applications / services
+
+You can use memplify also in background jobs and in any place of your app by using reporter directly.
+Just provide report identifier and wrap code with:
+
+```ruby
+Memplify.report("custom/profile", profile: Rails.env.staging?) do
+  # Your code
+end
 ```
 
 ## Development
