@@ -30,8 +30,6 @@ Memplify.configure do |configuration|
 end
 ```
 
-Add memplify middleware to application for specific environment. Do not use it on **production**!
-
 For example add memplify middleware for staging environment: `config/environments/staging.rb`
 
 ```ruby
@@ -44,7 +42,7 @@ You can use memplify also in background jobs and in any place of your app by usi
 Just provide report identifier and wrap code with:
 
 ```ruby
-Memplify.report("runtime/custom/profile") do
+Memplify.report("custom/profile", profile: Rails.env.staging?) do
   # Your code
 end
 ```

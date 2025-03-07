@@ -20,7 +20,9 @@ module Memplify
       yield(configuration)
     end
 
-    def report(identifier, &block)
+    def report(identifier, profile: true, &block)
+      return block.call unless profile
+
       result = MemoryProfiler.report do
         block.call
       end
