@@ -61,7 +61,7 @@ class Application
 end
 
 builder = Rack::Builder.new do
-  use Memplify::Middleware
+  use Memplify::Middleware if ENV["RACK_ENV"] == "staging"
 
   map('/') { run Application.new }
 end
@@ -75,7 +75,7 @@ You can use memplify also in background jobs and in any place of your app by usi
 Just provide report identifier and wrap code with:
 
 ```ruby
-Memplify.report("custom/profile", profile: Rails.env.staging?) do
+Memplify.report("custom/profile", profile: ENV["ENVIRONMENT"] == "staging") do
   # Your code
 end
 ```
