@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.3.1] - 2025-03-26
+
+- Bump json, rubocop and webmock version due to security issue (https://github.com/tkowalewski/memplify/security/dependabot/1)
+
 ## [0.3.0] - 2025-03-07
 
 - Oh, man. You should forward block to MemoryProfiler
